@@ -22,11 +22,16 @@ public class Button extends Main {
 		button.setBackground(Color.WHITE);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-	            button.setText(playerPick);
-	            button.setForeground(Color.BLUE);
-	            button.setFont(new Font("Purisa", Font.BOLD,button.getHeight()));
+				
+					button.setText("X");
+		            button.setForeground(Color.BLUE);
+		            button.setFont(new Font("Purisa", Font.PLAIN,button.getHeight()));
+				
+				
 	         }
 		});
+		
+		
 	}
 	
 	

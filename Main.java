@@ -4,13 +4,13 @@ import javax.swing.*;
 
 public class Main {
 	
-	private static String Player1;
+	public static String Player1;
 	private static int opponent; 
-	private static String Player2; 
+	public static String Player2; 
 	private static Board board; 
 	private static int order;
 	private static int choice;
-	private static String whoFirst;
+	public static String whoFirst;
 	public static String playerPick;
 	public static String player2Pick;
 	private static String cpuPick;
@@ -65,6 +65,15 @@ public class Main {
 		 * 
 		 */
 		if (opponent == 0){
+			
+			String[]choices = {"X", "O"};
+			choice = JOptionPane.showOptionDialog(null, Player1 + " ,do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
+			if (choice == 0) {
+				JOptionPane.showMessageDialog(null, Player1 + " is X and " + "the Computer is O");
+			}
+			if (choice == 1) {
+				JOptionPane.showMessageDialog(null, Player1 + " is O and " + "the Computer is X");
+			}
 			String[] orderOption = {"Computer", "Player"}; 
 			order = JOptionPane.showOptionDialog(null,"Who do you want to have the first move?: ", "Choose who gets the first move", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, orderOption, null);
 			 if(order == 0) {
@@ -75,14 +84,6 @@ public class Main {
 				 whoFirst = Player1;
 				 JOptionPane.showMessageDialog(null, Player1 + " goes first!");
 			 }
-			String[]choices = {"X", "O"};
-			choice = JOptionPane.showOptionDialog(null, Player1 + " ,do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
-			if (choice == 0) {
-				JOptionPane.showMessageDialog(null, Player1 + " is X and " + "the Computer is O");
-			}
-			if (choice == 1) {
-				JOptionPane.showMessageDialog(null, Player1 + " is O and " + "the Computer is X");
-			}
 		}
 		
 		
