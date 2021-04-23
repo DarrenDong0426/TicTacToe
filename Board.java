@@ -5,10 +5,15 @@ import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Board {
 
+
+public class Board extends Main {
+
+	
+	
 	public Board(){
 		
 		// Create panel for information on the game
@@ -18,8 +23,10 @@ public class Board {
 		JPanel boardPanel = new JPanel();
 		boardPanel.setLayout(new GridLayout(3, 3, 0, 0));
 		
+		label = new JLabel();
 		// Create a frame for everything
 		JFrame frame = new JFrame(); 
+		infoPanel.add(label);
 		frame.add(infoPanel, BorderLayout.NORTH); 
 		frame.add(boardPanel, BorderLayout.CENTER);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

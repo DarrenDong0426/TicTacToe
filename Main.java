@@ -18,7 +18,7 @@ public class Main {
 	public static boolean isPlayer2;
 	public static boolean isCPU;
 	public static boolean vsCPU;
-	
+	public static JLabel label;
 	
 	public static void main(String[] args) {
 		

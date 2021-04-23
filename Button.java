@@ -33,6 +33,9 @@ public class Button extends Main {
 						isCPU = false;
 						isPlayer1 = true;
 						button.setEnabled(false);
+						label.setText(Player1 + " it is your turn");
+						label.setFont(new Font("Purisa", Font.PLAIN,40));
+						label.setForeground(Color.BLUE);
 					}
 					else {
 						button.setText(playerPick);
@@ -41,6 +44,9 @@ public class Button extends Main {
 						isCPU = true;
 						isPlayer1 = false;
 						button.setEnabled(false);
+						label.setText("CPU's turn");
+						label.setFont(new Font("Purisa", Font.PLAIN,40));
+						label.setForeground(Color.BLUE);
 					}
 					
 				}
@@ -53,6 +59,9 @@ public class Button extends Main {
 						isPlayer2 = true;
 						isPlayer1 = false;
 						button.setEnabled(false);
+						label.setText(Player1 + " it is your turn");
+						label.setFont(new Font("Purisa", Font.PLAIN,40));
+						label.setForeground(Color.BLUE);
 					}
 					else {
 						button.setText(playerPick);
@@ -61,6 +70,9 @@ public class Button extends Main {
 						isPlayer2 = false;
 						isPlayer1 = true;
 						button.setEnabled(false);
+						label.setText(Player2 + " it is your turn");
+						label.setFont(new Font("Purisa", Font.PLAIN,40));
+						label.setForeground(Color.BLUE);
 					}
 				}
 				
@@ -71,7 +83,9 @@ public class Button extends Main {
 		});
 		
 		
-	}
+			
+		}
+	
 	
 	
 	
