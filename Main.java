@@ -7,13 +7,18 @@ public class Main {
 	public static String Player1;
 	private static int opponent; 
 	public static String Player2; 
-	private static Board board; 
+	public static Board board; 
 	private static int order;
 	private static int choice;
 	public static String whoFirst;
 	public static String playerPick;
 	public static String player2Pick;
-	private static String cpuPick;
+	public static String cpuPick;
+	public static boolean isPlayer1;
+	public static boolean isPlayer2;
+	public static boolean isCPU;
+	public static boolean vsCPU;
+	
 	
 	public static void main(String[] args) {
 		
@@ -33,6 +38,7 @@ public class Main {
 		
 		// If the opponent is another player, ask user the name of that player
 		if (opponent == 1){
+			vsCPU = false;
 			Player2 = JOptionPane.showInputDialog("Enter the name of Player 2: ");
 			String[]choices = {"X", "O"};
 			choice = JOptionPane.showOptionDialog(null, Player1 + " ,do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
@@ -65,24 +71,33 @@ public class Main {
 		 * 
 		 */
 		if (opponent == 0){
-			
+			vsCPU = true;
 			String[]choices = {"X", "O"};
 			choice = JOptionPane.showOptionDialog(null, Player1 + " ,do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
 			if (choice == 0) {
 				JOptionPane.showMessageDialog(null, Player1 + " is X and " + "the Computer is O");
+				playerPick = "X";
+				cpuPick = "O";
 			}
 			if (choice == 1) {
 				JOptionPane.showMessageDialog(null, Player1 + " is O and " + "the Computer is X");
+				playerPick = "O";
+				cpuPick = "X";
 			}
 			String[] orderOption = {"Computer", "Player"}; 
 			order = JOptionPane.showOptionDialog(null,"Who do you want to have the first move?: ", "Choose who gets the first move", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, orderOption, null);
 			 if(order == 0) {
 				 whoFirst = "Computer";
 				 JOptionPane.showMessageDialog(null, "Computer goes first!");
+				 isCPU = true;
+				 isPlayer1 = false;	
 			 }
 			 if(order == 1) {
 				 whoFirst = Player1;
 				 JOptionPane.showMessageDialog(null, Player1 + " goes first!");
+				 isCPU = false;
+				 isPlayer1 = true;
+				 
 			 }
 		}
 		

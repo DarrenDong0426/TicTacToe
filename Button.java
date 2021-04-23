@@ -23,12 +23,51 @@ public class Button extends Main {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-					button.setText("X");
-		            button.setForeground(Color.BLUE);
-		            button.setFont(new Font("Purisa", Font.PLAIN,button.getHeight()));
+			for (int i = 0; i < 3; i++){
+			    for (int j = 0; j < 3; j++){
+				if(vsCPU) {
+					if(isCPU) {
+						button.setText(cpuPick);
+						button.setForeground(Color.BLUE);
+						button.setFont(new Font("Purisa", Font.PLAIN,button.getHeight()));
+						isCPU = false;
+						isPlayer1 = true;
+						button.setEnabled(false);
+					}
+					else {
+						button.setText(playerPick);
+						button.setForeground(Color.BLUE);
+						button.setFont(new Font("Purisa", Font.PLAIN,button.getHeight()));
+						isCPU = true;
+						isPlayer1 = false;
+						button.setEnabled(false);
+					}
+					
+				}
+				
+				else {
+					if(isPlayer1) {
+						button.setText(player2Pick);
+						button.setForeground(Color.BLUE);
+						button.setFont(new Font("Purisa", Font.PLAIN,button.getHeight()));
+						isPlayer2 = true;
+						isPlayer1 = false;
+						button.setEnabled(false);
+					}
+					else {
+						button.setText(playerPick);
+						button.setForeground(Color.BLUE);
+						button.setFont(new Font("Purisa", Font.PLAIN,button.getHeight()));
+						isPlayer2 = false;
+						isPlayer1 = true;
+						button.setEnabled(false);
+					}
+				}
 				
 				
 	         }
+				}
+			}
 		});
 		
 		
