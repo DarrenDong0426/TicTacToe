@@ -1,6 +1,5 @@
-package TicTacToe;
-
-import javax.swing.*; 
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Main {
 	
@@ -41,7 +40,7 @@ public class Main {
 			vsCPU = false;
 			Player2 = JOptionPane.showInputDialog("Enter the name of Player 2: ");
 			String[]choices = {"X", "O"};
-			choice = JOptionPane.showOptionDialog(null, Player1 + " ,do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
+			choice = JOptionPane.showOptionDialog(null, Player1 + ",do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
 			if (choice == 0) {
 				JOptionPane.showMessageDialog(null, Player1 + " is X and " + Player2 + " is O");
 				playerPick = "X";
@@ -73,7 +72,7 @@ public class Main {
 		if (opponent == 0){
 			vsCPU = true;
 			String[]choices = {"X", "O"};
-			choice = JOptionPane.showOptionDialog(null, Player1 + " ,do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
+			choice = JOptionPane.showOptionDialog(null, Player1 + ", do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
 			if (choice == 0) {
 				JOptionPane.showMessageDialog(null, Player1 + " is X and " + "the Computer is O");
 				playerPick = "X";
@@ -111,6 +110,7 @@ public class Main {
 	// Accessor Methods
 	public int getOpponent(){return opponent;}
 	public String getPlayer2(){return Player2;}
+	public String getPlayer1(){return Player1;}
 	
 	
 }
