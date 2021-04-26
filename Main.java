@@ -40,7 +40,7 @@ public class Main {
 			vsCPU = false;
 			Player2 = JOptionPane.showInputDialog("Enter the name of Player 2: ");
 			String[]choices = {"X", "O"};
-			choice = JOptionPane.showOptionDialog(null, Player1 + ",do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
+			choice = JOptionPane.showOptionDialog(null, Player1 + " ,do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
 			if (choice == 0) {
 				JOptionPane.showMessageDialog(null, Player1 + " is X and " + Player2 + " is O");
 				playerPick = "X";
