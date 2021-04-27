@@ -103,8 +103,8 @@ public class Board extends Main {
 										button.getButton().removeActionListener(this);
 									}
 								}
-						if (checkWin()){
-							if (getIsPlayer2())
+						if (checkWin()) {
+							if (getIsPlayer2() || getIsCpu())
 								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer1() + " is the winner!");
 							else
 								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");
