@@ -1,5 +1,3 @@
-package TicTacToe;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -20,6 +18,7 @@ public class Board extends Main {
 	private Button[][] board;
 	private static JFrame frame; 
 	public static JLabel label;
+	private static boolean tie; 
 
 
 	public Board(){
@@ -48,6 +47,7 @@ public class Board extends Main {
 			for (int j = 0; j < 3; j++){
 				final Button button = new Button(i, j);
 				board[i][j] = button;
+				button.getButton().setFocusPainted(false);
 				boardPanel.add(button.getButton()); 
 				button.getButton().addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -58,10 +58,10 @@ public class Board extends Main {
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
 										setIsCpu(false);
 										setIsPlayer1(true);
-										button.getButton().setEnabled(false);
 										label.setText(Player1 + " it is your turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
 										label.setForeground(Color.BLUE);
+										button.getButton().removeActionListener(this);
 									}
 									else {
 										button.getButton().setText(getPlayerPick());
@@ -69,10 +69,10 @@ public class Board extends Main {
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
 										setIsCpu(true);
 										setIsPlayer1(false);
-										button.getButton().setEnabled(false);
 										label.setText("CPU's turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
 										label.setForeground(Color.BLUE);
+										button.getButton().removeActionListener(this);
 									}
 								}
 								
@@ -83,8 +83,7 @@ public class Board extends Main {
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
 										setIsPlayer2(true);
 										setIsPlayer1(false); 
-										button.getButton().setEnabled(false);
-										/*button.getButton().removeActionListener(this);*/
+										button.getButton().removeActionListener(this);
 										
 										label.setText(Player2 + " it is your turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
@@ -96,10 +95,10 @@ public class Board extends Main {
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
 										setIsPlayer2(false);
 										setIsPlayer1(true); 
-										button.getButton().setEnabled(false);
 										label.setText(Player1 + " it is your turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
 										label.setForeground(Color.BLUE);
+										button.getButton().removeActionListener(this);
 									}
 								}
 						if (checkWin()){
@@ -116,6 +115,19 @@ public class Board extends Main {
 							if (Answer == 1)
 								System.exit(0);
 						}
+						else{
+							if (tie){
+								JOptionPane.showMessageDialog(Board.getFrame(), "It's a tie! No one is the winner!");
+								String Option[] = {"Yes", "No"};
+								int Answer = JOptionPane.showOptionDialog(null,"Replay?", "Do you want to play again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, Option, null);
+								if (Answer == 0){
+									frame.setVisible(false);
+									main(null); 
+								}
+								if (Answer == 1)
+									System.exit(0);
+							} 
+						}
 					}
 				});
 			}
@@ -123,6 +135,17 @@ public class Board extends Main {
 	} 
 
 		public boolean checkWin() {
+			tie = true;
+			 for (int i = 0; i < 3; i++){
+				 for (int j = 0; j < 3; j++){
+					 if (board[i][j].getString() == ""){
+						 tie = false;
+						 break;  
+					 }
+				 }
+				 if (!tie)
+					 break;
+			}
 			for (int i = 0; i < 3; i++){
 				if (!board[i][0].getString().equals("") && board[i][0].getString().equals(board[i][1].getString()) && board[i][0].getString().equals(board[i][2].getString()))
 					return true;
@@ -138,13 +161,16 @@ public class Board extends Main {
 			
 			return false;
 		}
-		 public void paint(Graphics g) {
-			    super.paint(g); 
-			    Graphics2D g2 = (Graphics2D) g;
-			    Line2D lin = new Line2D.Float(100, 100, 250, 260);
-			    g2.draw(lin);
-			  }
 		
+		public void paint(Graphics g) {
+		    super.paint(g); 
+		    Graphics2D g2 = (Graphics2D) g;
+		    Line2D lin = new Line2D.Float(100, 100, 250, 260);
+		    g2.draw(lin);
+		}
+		
+		 
+		 
 		public static JFrame getFrame(){
 			return frame; 
 		}

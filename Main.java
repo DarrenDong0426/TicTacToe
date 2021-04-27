@@ -1,8 +1,8 @@
-package TicTacToe;
+import java.awt.Color;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 public class Main extends JFrame {
 	
@@ -21,7 +21,7 @@ public class Main extends JFrame {
 	private static boolean vsCPU;
 	
 	public static void main(String[] args) {
-		
+		UIManager.put("Button.select", Color.white);
 		//Ask the user for name
 	
 		/* Ask user if the opponent is another player or a computer 
