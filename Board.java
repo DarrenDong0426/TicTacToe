@@ -95,7 +95,7 @@ public class Board extends Main {
 									}
 								}
 						if (checkWin()){
-							if (isPlayer2 == false)
+							if (isPlayer2 == true)
 								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");
 							else
 								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer1() + " is the winner!");
@@ -116,78 +116,17 @@ public class Board extends Main {
 
 		public boolean checkWin() {
 			for (int i = 0; i < 3; i++){
-				for (int j = 0; j < 3; j++){
-					if(i == 0 && j == 0 && board[i][j].getButton().getText() != null) {
-						/* Order: first is vertical comparison, then horizontal then across*/
-						if((board[i][j].getButton().getText().equals(board[i+1][j].getButton().getText()) &&
-								board[i][j].getButton().getText().equals(board[i+2][j].getButton().getText())) ||
-								(board[i][j].getButton().getText().equals(board[i][j+1].getButton().getText()) &&
-										board[i][j].getButton().getText().equals(board[i][j+2].getButton().getText()))
-								|| (board[i][j].getButton().getText().equals(board[i+1][j+1].getButton().getText()) &&
-										board[i][j].getButton().getText().equals(board[i+2][j+2].getButton().getText()))) {
-							return true;
-						}
-					}else if(i == 0 && j == 2 && board[i][j].getButton().getText() != null) {
-						if((board[i][j].getButton().getText().equals(board[i-1][j].getButton().getText()) &&
-								board[i][j].getButton().getText().equals(board[i-2][j].getButton().getText())) ||
-								(board[i][j].getButton().getText().equals(board[i][j-1].getButton().getText()) &&
-										board[i][j].getButton().getText().equals(board[i][j-2].getButton().getText()))
-								|| (board[i][j].getButton().getText().equals(board[i+1][j-1].getButton().getText()) &&
-										board[i][j].getButton().getText().equals(board[i+2][j-2].getButton().getText()))) {
-							return true;
-						}
-					}else if(i == 2 && j == 0 && board[i][j].getButton().getText() != null){
-						if((board[i][j].getButton().getText().equals(board[i-1][j].getButton().getText()) &&
-								board[i][j].getButton().getText().equals(board[i-2][j].getButton().getText())) ||
-								(board[i][j].getButton().getText().equals(board[i][j+1].getButton().getText()) &&
-										board[i][j].getButton().getText().equals(board[i][j+2].getButton().getText()))
-								|| (board[i][j].getButton().getText().equals(board[i-1][j+1].getButton().getText()) &&
-										board[i][j].getButton().getText().equals(board[i-2][j+2].getButton().getText()))) {
-							return true;
-						}
-					}else if(i == 2 && j == 2 && board[i][j].getButton().getText() != null){
-						if((board[i][j].getButton().getText().equals(board[i-1][j].getButton().getText()) &&
-								board[i][j].getButton().getText().equals(board[i-2][j].getButton().getText())) ||
-								(board[i][j].getButton().getText().equals(board[i][j-1].getButton().getText()) &&
-										board[i][j].getButton().getText().equals(board[i][j-2].getButton().getText()))
-								|| (board[i][j].getButton().getText().equals(board[i-1][j-1].getButton().getText()) &&
-										board[i][j].getButton().getText().equals(board[i-2][j-2].getButton().getText()))) {
-							return true;
-						}
-					}else if(i == 1) {
-						if(j == 0 && board[i][j].getButton().getText() != null) {
-							if(board[i][j].getButton().getText().equals(board[i][j+1]) && 
-									board[i][j].getButton().getText().equals(board[i][j+2])) {
-								return true;
-							}
-						}else if (j == 1 && board[i][j].getButton().getText() != null) {
-							if(board[i][j].getButton().getText().equals(board[i][j+1]) && 
-									board[i][j].getButton().getText().equals(board[i][j-1]) ||
-									board[i][j].getButton().getText().equals(board[i-1][j]) && 
-									board[i][j].getButton().getText().equals(board[i+1][j])) {
-								return true;
-							}
-						}else if(j == 2 && board[i][j].getButton().getText() != null) {
-							if(board[i][j].getButton().getText().equals(board[i][j-1]) && 
-									board[i][j].getButton().getText().equals(board[i][j-2])) {
-								return true;
-							}
-						}
-					}else if (j == 1) {
-						if(i == 0 && board[i][j].getButton().getText() != null) {
-							if(board[i][j].getButton().getText().equals(board[i+1][j].getButton().getText()) &&
-									board[i][j].getButton().getText().equals(board[i+2][j].getButton().getText())) {
-								return true;
-							}
-						}
-					}else if(i == 2 && board[i][j].getButton().getText() != null) {
-							if(board[i][j].getButton().getText().equals(board[i-1][j].getButton().getText()) &&
-									board[i][j].getButton().getText().equals(board[i-2][j].getButton().getText())) {
-
-						}
-					}
-				}
+				if (!board[i][0].getString().equals("") && board[i][0].getString().equals(board[i][1].getString()) && board[i][0].getString().equals(board[i][2].getString()))
+					return true;
 			}
+			for (int j = 0; j < 3; j++){
+				if (!board[0][j].getString().equals("") && board[0][j].getString().equals(board[1][j].getString()) && board[0][j].getString().equals(board[2][j].getString()))
+					return true;	
+			}
+			if (!board[0][0].getString().equals("") && board[0][0].getString().equals(board[1][1].getString()) && board[0][0].getString().equals(board[2][2].getString()))
+				return true;
+			if (!board[0][2].getString().equals("") && board[0][2].getString().equals(board[1][1].getString()) && board[0][2].getString().equals(board[2][0].getString()))
+				return true;
 			return false;
 		}
 		

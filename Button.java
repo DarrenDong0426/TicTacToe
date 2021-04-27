@@ -28,5 +28,5 @@ public class Button extends Main {
 	
 	// Accessor Method
 	public JButton getButton(){return button;}
-	
+	public String getString(){return this.getButton().getText();}
 }
