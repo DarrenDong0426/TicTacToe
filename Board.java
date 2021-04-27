@@ -14,6 +14,7 @@ public class Board extends Main {
 
 	private Button[][] board;
 	private static JFrame frame; 
+	public static JLabel label;
 
 
 	public Board(){
@@ -45,24 +46,24 @@ public class Board extends Main {
 				boardPanel.add(button.getButton()); 
 				button.getButton().addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-								if(vsCPU) {
-									if(isCPU) {
-										button.getButton().setText(cpuPick);
+								if(getVsCpu()) {
+									if(getIsCpu()) {
+										button.getButton().setText(getCpuPick());
 										button.getButton().setForeground(Color.BLUE);
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
-										isCPU = false;
-										isPlayer1 = true;
+										setIsCpu(false);
+										setIsPlayer1(true);
 										button.getButton().setEnabled(false);
 										label.setText(Player1 + " it is your turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
 										label.setForeground(Color.BLUE);
 									}
 									else {
-										button.getButton().setText(playerPick);
+										button.getButton().setText(getPlayerPick());
 										button.getButton().setForeground(Color.BLUE);
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
-										isCPU = true;
-										isPlayer1 = false;
+										setIsCpu(true);
+										setIsPlayer1(false);
 										button.getButton().setEnabled(false);
 										label.setText("CPU's turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
@@ -71,34 +72,34 @@ public class Board extends Main {
 								}
 								
 								else {
-									if(isPlayer1) {
-										button.getButton().setText(player2Pick);
+									if(getIsPlayer1()) {
+										button.getButton().setText(getPlayerPick());
 										button.getButton().setForeground(Color.BLUE);
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
-										isPlayer2 = true;
-										isPlayer1 = false;
-										button.getButton().setEnabled(false);
-										label.setText(Player1 + " it is your turn");
-										label.setFont(new Font("Purisa", Font.PLAIN,40));
-										label.setForeground(Color.BLUE);
-									}
-									else {
-										button.getButton().setText(playerPick);
-										button.getButton().setForeground(Color.BLUE);
-										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
-										isPlayer2 = false;
-										isPlayer1 = true;
+										setIsPlayer2(true);
+										setIsPlayer1(false); 
 										button.getButton().setEnabled(false);
 										label.setText(Player2 + " it is your turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
 										label.setForeground(Color.BLUE);
 									}
+									else {
+										button.getButton().setText(getPlayer2Pick());
+										button.getButton().setForeground(Color.BLUE);
+										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
+										setIsPlayer2(false);
+										setIsPlayer1(true); 
+										button.getButton().setEnabled(false);
+										label.setText(Player1 + " it is your turn");
+										label.setFont(new Font("Purisa", Font.PLAIN,40));
+										label.setForeground(Color.BLUE);
+									}
 								}
 						if (checkWin()){
-							if (isPlayer2 == true)
-								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");
-							else
+							if (getIsPlayer2())
 								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer1() + " is the winner!");
+							else
+								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");
 							String Option[] = {"Yes", "No"};
 							int Answer = JOptionPane.showOptionDialog(null,"Replay?", "Do you want to play again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, Option, null);
 							if (Answer == 0){

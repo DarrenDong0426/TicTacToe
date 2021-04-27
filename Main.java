@@ -9,15 +9,13 @@ public class Main {
 	public static Board board; 
 	private static int order;
 	private static int choice;
-	public static String whoFirst;
-	public static String playerPick;
-	public static String player2Pick;
-	public static String cpuPick;
-	public static boolean isPlayer1;
-	public static boolean isPlayer2;
-	public static boolean isCPU;
-	public static boolean vsCPU;
-	public static JLabel label;
+	private static String playerPick;
+	private static String player2Pick;
+	private static String cpuPick;
+	private static boolean isPlayer1;
+	private static boolean isPlayer2;
+	private static boolean isCPU;
+	private static boolean vsCPU;
 	
 	public static void main(String[] args) {
 		
@@ -40,7 +38,7 @@ public class Main {
 			vsCPU = false;
 			Player2 = JOptionPane.showInputDialog("Enter the name of Player 2: ");
 			String[]choices = {"X", "O"};
-			choice = JOptionPane.showOptionDialog(null, Player1 + " ,do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
+			choice = JOptionPane.showOptionDialog(null, Player1 + ", do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
 			if (choice == 0) {
 				JOptionPane.showMessageDialog(null, Player1 + " is X and " + Player2 + " is O");
 				playerPick = "X";
@@ -54,12 +52,14 @@ public class Main {
 			String[] orderOption = {Player1, Player2}; 
 			order = JOptionPane.showOptionDialog(null,"Who do you want to have the first move?: ", "Choose who gets the first move", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, orderOption, null); 
 			 if(order == 0) {
-				 whoFirst = Player1;
 				 JOptionPane.showMessageDialog(null, Player1 + " goes first!");
+				 isPlayer1 = true;
+				 isPlayer2 = false;
 			 }
 			 if(order == 1) {
-				 whoFirst = Player2;
 				 JOptionPane.showMessageDialog(null, Player2 + " goes first!");
+				 isPlayer2 = true;
+				 isPlayer1 = false; 
 			 }
 		}
 			
@@ -86,13 +86,11 @@ public class Main {
 			String[] orderOption = {"Computer", "Player"}; 
 			order = JOptionPane.showOptionDialog(null,"Who do you want to have the first move?: ", "Choose who gets the first move", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, orderOption, null);
 			 if(order == 0) {
-				 whoFirst = "Computer";
 				 JOptionPane.showMessageDialog(null, "Computer goes first!");
 				 isCPU = true;
 				 isPlayer1 = false;	
 			 }
 			 if(order == 1) {
-				 whoFirst = Player1;
 				 JOptionPane.showMessageDialog(null, Player1 + " goes first!");
 				 isCPU = false;
 				 isPlayer1 = true;
@@ -107,10 +105,21 @@ public class Main {
 		board = new Board(); 	
 	}
 
-	// Accessor Methods
+	// Accessor/Setter Methods
 	public int getOpponent(){return opponent;}
 	public String getPlayer2(){return Player2;}
 	public String getPlayer1(){return Player1;}
+	public String getPlayerPick(){return playerPick;}
+	public String getPlayer2Pick(){return player2Pick;}
+	public String getCpuPick(){return cpuPick;}
+	public boolean getIsPlayer1(){return isPlayer1;}
+	public boolean getIsPlayer2(){return isPlayer2;}
+	public boolean getIsCpu(){return isCPU;}
+	public boolean getVsCpu(){return vsCPU;}
+	public void setIsCpu(boolean b){isCPU = b;}
+	public void setIsPlayer1(boolean b){isPlayer1 = b;}
+	public void setIsPlayer2(boolean b){isPlayer2 = b;}
+
 	
 	
 }
