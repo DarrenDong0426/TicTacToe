@@ -1,5 +1,3 @@
-package TicTacToe;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -44,6 +42,7 @@ public class Board extends Main {
 		frame.setVisible(true); 
 
 		// Create Button objects for each board location 
+		
 		board = new Button[3][3];
 		for (int i = 0; i < 3; i++){
 			for (int j = 0; j < 3; j++){
@@ -54,28 +53,22 @@ public class Board extends Main {
 				button.getButton().addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 								if(getVsCpu()) {
-									if(getIsCpu()) {
-										button.getButton().setText(getCpuPick());
-										button.getButton().setForeground(new Color(51, 204, 255));
-										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
-										setIsCpu(false);
-										setIsPlayer1(true);
-										label.setText(Player1 + " it is your turn");
-										label.setFont(new Font("Purisa", Font.PLAIN,40));
-										label.setForeground(new Color(51, 51, 51));
-										button.getButton().removeActionListener(this);
-									}
-									else {
+									if(getIsCpu() == false) {
 										button.getButton().setText(getPlayerPick());
 										button.getButton().setForeground(new Color(255, 102, 102));
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
 										setIsCpu(true);
 										setIsPlayer1(false);
-										label.setText("CPU's turn");
+										label.setText(Player1 + " it is your turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
 										label.setForeground(new Color(51, 51, 51));
 										button.getButton().removeActionListener(this);
 									}
+									label.setText("CPU's turn");
+									label.setFont(new Font("Purisa", Font.PLAIN,40));
+									label.setForeground(new Color(51, 51, 51));
+									button.getButton().removeActionListener(this);
+									CpuMove(); 
 								}
 								
 								else {
@@ -132,9 +125,28 @@ public class Board extends Main {
 						}
 					}
 				});
+				if (getIsCpu())
+					CpuMove();
 			}
 		}
 	} 
+
+		public void CpuMove() {
+			boolean moved = false;
+			for (int i = 0; i < 3; i++){
+				for (int j = 0; j < 3; j++){
+					if (board[i][j].getString().equals("")){
+						board[i][j].getButton().setText(getCpuPick());
+						moved = true;
+						break;
+					}
+				}
+				if (moved)
+					break; 
+			}
+			setIsCpu(false); 
+			
+		}
 
 		public boolean checkWin() {
 			tie = true;
