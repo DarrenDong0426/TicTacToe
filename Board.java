@@ -1,3 +1,5 @@
+package TicTacToe;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -19,7 +21,7 @@ public class Board extends Main {
 	private static JFrame frame; 
 	public static JLabel label;
 	private static boolean tie; 
-
+	
 
 	public Board(){
 
@@ -54,24 +56,24 @@ public class Board extends Main {
 								if(getVsCpu()) {
 									if(getIsCpu()) {
 										button.getButton().setText(getCpuPick());
-										button.getButton().setForeground(Color.BLUE);
+										button.getButton().setForeground(new Color(51, 204, 255));
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
 										setIsCpu(false);
 										setIsPlayer1(true);
 										label.setText(Player1 + " it is your turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
-										label.setForeground(Color.BLUE);
+										label.setForeground(new Color(51, 51, 51));
 										button.getButton().removeActionListener(this);
 									}
 									else {
 										button.getButton().setText(getPlayerPick());
-										button.getButton().setForeground(Color.BLUE);
+										button.getButton().setForeground(new Color(255, 102, 102));
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
 										setIsCpu(true);
 										setIsPlayer1(false);
 										label.setText("CPU's turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
-										label.setForeground(Color.BLUE);
+										label.setForeground(new Color(51, 51, 51));
 										button.getButton().removeActionListener(this);
 									}
 								}
@@ -79,7 +81,7 @@ public class Board extends Main {
 								else {
 									if(getIsPlayer1()) {
 										button.getButton().setText(getPlayerPick());
-										button.getButton().setForeground(Color.BLUE);
+										button.getButton().setForeground(new Color(51, 204, 255));
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
 										setIsPlayer2(true);
 										setIsPlayer1(false); 
@@ -87,17 +89,17 @@ public class Board extends Main {
 										
 										label.setText(Player2 + " it is your turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
-										label.setForeground(Color.BLUE);
+										label.setForeground(new Color(51, 51, 51));
 									}
 									else {
 										button.getButton().setText(getPlayer2Pick());
-										button.getButton().setForeground(Color.BLUE);
+										button.getButton().setForeground(new Color(255, 102, 102));
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
 										setIsPlayer2(false);
 										setIsPlayer1(true); 
 										label.setText(Player1 + " it is your turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
-										label.setForeground(Color.BLUE);
+										label.setForeground(new Color(51, 51, 51));
 										button.getButton().removeActionListener(this);
 									}
 								}

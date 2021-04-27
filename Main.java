@@ -1,3 +1,5 @@
+package TicTacToe;
+
 import java.awt.Color;
 
 import javax.swing.JOptionPane;
@@ -19,6 +21,7 @@ public class Main extends JFrame {
 	private static boolean isPlayer2;
 	private static boolean isCPU;
 	private static boolean vsCPU;
+	
 	
 	public static void main(String[] args) {
 		UIManager.put("Button.select", Color.white);
