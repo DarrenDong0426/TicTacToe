@@ -77,6 +77,7 @@ public class Main extends JFrame {
 		 */
 		if (opponent == 0){
 			vsCPU = true;
+			Player2 = "Computer";
 			String[]choices = {"X", "O"};
 			choice = JOptionPane.showOptionDialog(null, Player1 + ", do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
 			if (choice == 0) {
