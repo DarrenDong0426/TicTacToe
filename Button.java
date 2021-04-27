@@ -1,10 +1,15 @@
+package TicTacToe;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.plaf.basic.BasicButtonUI;
 
 
 public class Button extends Main {
@@ -20,6 +25,10 @@ public class Button extends Main {
 		button = new JButton();
 		button.setBackground(Color.WHITE);
 		
+		button.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+	     
+	           
 	}
 	
 	

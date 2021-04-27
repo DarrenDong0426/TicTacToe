@@ -1,9 +1,14 @@
+package TicTacToe;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Line2D;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -79,6 +84,8 @@ public class Board extends Main {
 										setIsPlayer2(true);
 										setIsPlayer1(false); 
 										button.getButton().setEnabled(false);
+										/*button.getButton().removeActionListener(this);*/
+										
 										label.setText(Player2 + " it is your turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
 										label.setForeground(Color.BLUE);
@@ -128,9 +135,15 @@ public class Board extends Main {
 				return true;
 			if (!board[0][2].getString().equals("") && board[0][2].getString().equals(board[1][1].getString()) && board[0][2].getString().equals(board[2][0].getString()))
 				return true;
+			
 			return false;
 		}
-		
+		 public void paint(Graphics g) {
+			    super.paint(g); 
+			    Graphics2D g2 = (Graphics2D) g;
+			    Line2D lin = new Line2D.Float(100, 100, 250, 260);
+			    g2.draw(lin);
+			  }
 		
 		public static JFrame getFrame(){
 			return frame; 

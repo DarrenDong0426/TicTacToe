@@ -1,7 +1,10 @@
+package TicTacToe;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 
-public class Main {
+public class Main extends JFrame {
 	
 	public static String Player1;
 	private static int opponent; 
