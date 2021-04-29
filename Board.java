@@ -1,5 +1,3 @@
-package TicTacToe;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -59,18 +57,19 @@ public class Board extends Main {
 										button.getButton().setText(getPlayerPick());
 										button.getButton().setForeground(new Color(255, 102, 102));
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
-										setIsCpu(true);
-										setIsPlayer1(false);
+										button.getButton().removeActionListener(this);
+										if (checkWin() == false)
+											setIsCpu(true);
+									}
+									if (checkWin() == false){
 										label.setText(Player1 + " it is your turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
 										label.setForeground(new Color(51, 51, 51));
 										button.getButton().removeActionListener(this);
+										CpuMove();
+										if (checkWin() == false)
+											setIsCpu(false); 
 									}
-									/*label.setText("CPU's turn");
-									label.setFont(new Font("Purisa", Font.PLAIN,40));
-									label.setForeground(new Color(51, 51, 51));*/
-									button.getButton().removeActionListener(this);
-									CpuMove(); 
 								}
 								
 								else {
@@ -100,9 +99,9 @@ public class Board extends Main {
 								}
 						if (checkWin()) {
 							if (getIsPlayer2() || getIsCpu())
-								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer1() + " is the winner!");
-							else
 								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");
+							else
+								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer1() + " is the winner!");
 							String Option[] = {"Yes", "No"};
 							int Answer = JOptionPane.showOptionDialog(null,"Replay?", "Do you want to play again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, Option, null);
 							if (Answer == 0){
@@ -127,10 +126,11 @@ public class Board extends Main {
 						}
 					}
 				});
-				if (getIsCpu())
-					CpuMove();
 			}
 		}
+		if (getIsCpu()){
+			CpuMove();	
+		}	
 	} 
 
 		public void CpuMove() {
@@ -139,8 +139,8 @@ public class Board extends Main {
 				for (int j = 0; j < 3; j++){
 					if (board[i][j].getString().equals("")){
 						board[i][j].getButton().setText(getCpuPick());
-						board[i][j].getButton().setForeground(new Color(51, 204, 255));
-						board[i][j].getButton().setFont(new Font("Purisa", Font.PLAIN,board[i][j].getButton().getHeight()));
+						board[i][j].setForeground(new Color(255, 102, 102));
+						board[i][j].setFont(new Font("Purisa", Font.PLAIN,board[i][j].getButton().getHeight()));
 						moved = true;
 						break;
 					}
@@ -149,14 +149,13 @@ public class Board extends Main {
 					break; 
 			}
 			setIsCpu(false); 
-			
 		}
 
 		public boolean checkWin() {
-			tie = true;
+			 tie = true;
 			 for (int i = 0; i < 3; i++){
 				 for (int j = 0; j < 3; j++){
-					 if (board[i][j].getString() == ""){
+					 if (board[i][j].getString().equals("")){
 						 tie = false;
 						 break;  
 					 }
@@ -180,10 +179,13 @@ public class Board extends Main {
 			return false;
 		}
 		
+		public void paint(Graphics g) {
+		    super.paint(g); 
+		    Graphics2D g2 = (Graphics2D) g;
+		    Line2D lin = new Line2D.Float(100, 100, 250, 260);
+		    g2.draw(lin);
+		}
 		
-		
-		 
-		 
 		public static JFrame getFrame(){
 			return frame; 
 		}
