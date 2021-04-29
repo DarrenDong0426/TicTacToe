@@ -1,3 +1,5 @@
+package TicTacToe;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -64,9 +66,9 @@ public class Board extends Main {
 										label.setForeground(new Color(51, 51, 51));
 										button.getButton().removeActionListener(this);
 									}
-									label.setText("CPU's turn");
+									/*label.setText("CPU's turn");
 									label.setFont(new Font("Purisa", Font.PLAIN,40));
-									label.setForeground(new Color(51, 51, 51));
+									label.setForeground(new Color(51, 51, 51));*/
 									button.getButton().removeActionListener(this);
 									CpuMove(); 
 								}
@@ -137,6 +139,8 @@ public class Board extends Main {
 				for (int j = 0; j < 3; j++){
 					if (board[i][j].getString().equals("")){
 						board[i][j].getButton().setText(getCpuPick());
+						board[i][j].getButton().setForeground(new Color(51, 204, 255));
+						board[i][j].getButton().setFont(new Font("Purisa", Font.PLAIN,board[i][j].getButton().getHeight()));
 						moved = true;
 						break;
 					}
@@ -176,12 +180,7 @@ public class Board extends Main {
 			return false;
 		}
 		
-		public void paint(Graphics g) {
-		    super.paint(g); 
-		    Graphics2D g2 = (Graphics2D) g;
-		    Line2D lin = new Line2D.Float(100, 100, 250, 260);
-		    g2.draw(lin);
-		}
+		
 		
 		 
 		 
