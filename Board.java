@@ -116,10 +116,17 @@ public class Board extends Main {
 									}
 								}
 						if (checkWin()) {
-							if (getIsPlayer2() || getIsCpu())
-								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer1() + " is the winner!");
-							else
-								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");
+							if(getVsCpu()) {
+								if (getIsPlayer2() || getIsCpu())
+									JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");
+								else
+									JOptionPane.showMessageDialog(Board.getFrame(), getPlayer1() + " is the winner!");
+							}
+							else 
+								if(getIsPlayer2())
+									JOptionPane.showMessageDialog(Board.getFrame(), getPlayer1() + " is the winner!");
+								else
+									JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");;
 							String Option[] = {"Yes", "No"};
 							int Answer = JOptionPane.showOptionDialog(null,"Replay?", "Do you want to play again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, Option, null);
 							if (Answer == 0){
