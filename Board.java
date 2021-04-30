@@ -1,9 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Line2D;
@@ -20,16 +22,18 @@ public class Board extends Main {
 	private static JFrame frame; 
 	public static JLabel label;
 	private static boolean tie; 
-	private String CpuPick = getCpuPick(); 
+	private Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); 
+	private JPanel infoPanel;
+	private JPanel boardPanel; 
 	
 
 	public Board(){
 
 		// Create panel for information on the game
-		JPanel infoPanel = new JPanel(); 
+		infoPanel = new JPanel(); 
 
 		// Create panel for the board of the game in a 3x3 grid
-		JPanel boardPanel = new JPanel();
+		boardPanel = new JPanel();
 		boardPanel.setLayout(new GridLayout(3, 3, 0, 0));
 
 		label = new JLabel();
@@ -40,7 +44,9 @@ public class Board extends Main {
 		frame.add(boardPanel, BorderLayout.CENTER);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Tic-Tac-Toe");
-		frame.pack();
+	    frame.setSize(600, 600);
+	    frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+	    frame.setResizable(false); 
 		frame.setVisible(true); 
 
 		// Create Button objects for each board location 
@@ -139,9 +145,8 @@ public class Board extends Main {
 			for (int i = 0; i < 3; i++){
 				for (int j = 0; j < 3; j++){
 					if (board[i][j].getString().equals("")){
-						board[i][j].getButton().setForeground(new Color(255, 102, 102));
-						board[i][j].getButton().setFont(new Font("Purisa", Font.PLAIN, board[i][j].getButton().getHeight()));
-						System.out.println(board[i][j].getButton().getHeight()); 
+						board[i][j].getButton().setForeground(new Color(51, 204, 255));
+						board[i][j].getButton().setFont(new Font("Purisa", Font.PLAIN, board[i][j].getButton().getHeight())); 
 						board[i][j].getButton().setText(getCpuPick());
 						moved = true;
 						break;
