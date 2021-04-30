@@ -1,5 +1,3 @@
-package TicTacToe;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -14,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 public class Board extends Main {
 
@@ -21,6 +20,7 @@ public class Board extends Main {
 	private static JFrame frame; 
 	public static JLabel label;
 	private static boolean tie; 
+	private String CpuPick = getCpuPick(); 
 	
 
 	public Board(){
@@ -60,18 +60,17 @@ public class Board extends Main {
 										button.getButton().setForeground(new Color(255, 102, 102));
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
 										button.getButton().removeActionListener(this);
-										if (checkWin() == false)
-											setIsCpu(true);
 									}
 									if (checkWin() == false){
 										label.setText(Player1 + " it is your turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
 										label.setForeground(new Color(51, 51, 51));
-									
 										button.getButton().removeActionListener(this);
 										CpuMove();
 										if (checkWin() == false)
 											setIsCpu(false); 
+										else
+											setIsCpu(true);
 									}
 								}
 								
@@ -79,7 +78,6 @@ public class Board extends Main {
 									if(getIsPlayer1()) {
 										button.getButton().setText(getPlayerPick());
 										button.getButton().setForeground(new Color(51, 204, 255));
-										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
 										setIsPlayer2(true);
 										setIsPlayer1(false); 
 										button.getButton().removeActionListener(this);
@@ -132,8 +130,8 @@ public class Board extends Main {
 			}
 		}
 		if (getIsCpu()){
-			CpuMove();	
-		}	
+			CpuMove(); 
+		}
 	} 
 
 		public void CpuMove() {
@@ -141,9 +139,10 @@ public class Board extends Main {
 			for (int i = 0; i < 3; i++){
 				for (int j = 0; j < 3; j++){
 					if (board[i][j].getString().equals("")){
+						board[i][j].getButton().setForeground(new Color(255, 102, 102));
+						board[i][j].getButton().setFont(new Font("Purisa", Font.PLAIN, board[i][j].getButton().getHeight()));
+						System.out.println(board[i][j].getButton().getHeight()); 
 						board[i][j].getButton().setText(getCpuPick());
-						board[i][j].getButton().setForeground(new Color(51, 204, 255));
-						board[i][j].getButton().setFont(new Font("Purisa", Font.PLAIN,board[i][j].getButton().getHeight()));
 						moved = true;
 						break;
 					}
@@ -181,8 +180,6 @@ public class Board extends Main {
 			
 			return false;
 		}
-		
-		
 		
 		public static JFrame getFrame(){
 			return frame; 
