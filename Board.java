@@ -1,11 +1,15 @@
+package TicTacToe;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Line2D;
@@ -28,7 +32,7 @@ public class Board extends Main {
 	
 
 	public Board(){
-
+		
 		// Create panel for information on the game
 		infoPanel = new JPanel(); 
 
@@ -44,10 +48,15 @@ public class Board extends Main {
 		frame.add(boardPanel, BorderLayout.CENTER);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Tic-Tac-Toe");
-	    frame.setSize(600, 600);
+		
+	    frame.setSize(650, 650);
+		/*frame.setExtendedState(JFrame.MAXIMIZED_BOTH);*/ 
+	
 	    frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
-	    frame.setResizable(false); 
-		frame.setVisible(true); 
+	    frame.setResizable(true); 
+	   
+		
+		
 
 		// Create Button objects for each board location 
 		
@@ -58,6 +67,7 @@ public class Board extends Main {
 				board[i][j] = button;
 				button.getButton().setFocusPainted(false);
 				boardPanel.add(button.getButton()); 
+				frame.setVisible(true); 
 				button.getButton().addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 								if(getVsCpu()) {
@@ -83,6 +93,7 @@ public class Board extends Main {
 								else {
 									if(getIsPlayer1()) {
 										button.getButton().setText(getPlayerPick());
+										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
 										button.getButton().setForeground(new Color(51, 204, 255));
 										setIsPlayer2(true);
 										setIsPlayer1(false); 
@@ -106,9 +117,9 @@ public class Board extends Main {
 								}
 						if (checkWin()) {
 							if (getIsPlayer2() || getIsCpu())
-								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");
-							else
 								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer1() + " is the winner!");
+							else
+								JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");
 							String Option[] = {"Yes", "No"};
 							int Answer = JOptionPane.showOptionDialog(null,"Replay?", "Do you want to play again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, Option, null);
 							if (Answer == 0){
@@ -140,6 +151,8 @@ public class Board extends Main {
 		}
 	} 
 
+	
+		
 		public void CpuMove() {
 			boolean moved = false;
 			for (int i = 0; i < 3; i++){
@@ -148,6 +161,8 @@ public class Board extends Main {
 						board[i][j].getButton().setForeground(new Color(51, 204, 255));
 						board[i][j].getButton().setFont(new Font("Purisa", Font.PLAIN, board[i][j].getButton().getHeight())); 
 						board[i][j].getButton().setText(getCpuPick());
+						board[i][j].getButton().setEnabled(false);
+						
 						moved = true;
 						break;
 					}

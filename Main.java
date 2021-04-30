@@ -1,4 +1,7 @@
+package TicTacToe;
+
 import java.awt.Color;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
@@ -31,6 +34,8 @@ public class Main extends JFrame {
 		 * opponent = 1 if User pick Player
 		 * 
 		 */
+		UIManager.put("Button.disabledText", new Color(51, 204, 255));
+		
 		String[] opponentOption = {"Computer", "Player"}; 
 		opponent = JOptionPane.showOptionDialog(null,"Who do you want to play against?", "Choose your opponent", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, opponentOption, null);
 		
@@ -108,6 +113,9 @@ public class Main extends JFrame {
 		
 		// Create a TicTacToe Board
 		board = new Board(); 	
+		
+		
+		
 	}
 
 	// Accessor/Setter Methods
