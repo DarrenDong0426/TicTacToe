@@ -80,7 +80,12 @@ public class Board extends Main {
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
 										label.setForeground(new Color(51, 51, 51));
 										button.getButton().removeActionListener(this);
-										CpuMove();
+										Button button = CpuMove();
+										button.getButton().setText(getCpuPick());
+										button.getButton().setForeground(new Color(51, 204, 255));
+										button.getButton().setFont(new Font("Purisa", Font.PLAIN, button.getButton().getHeight())); 
+										button.getButton().setEnabled(false);
+										setIsCpu(false); 
 										if (checkWin() == false)
 											setIsCpu(false); 
 										else
@@ -152,13 +157,88 @@ public class Board extends Main {
 			}
 		}
 		if (getIsCpu()){
-			CpuMove(); 
+			Button button = CpuMove();
+			button.getButton().setText(getCpuPick());
+			button.getButton().setForeground(new Color(51, 204, 255));
+			button.getButton().setFont(new Font("Purisa", Font.PLAIN, button.getButton().getHeight())); 
+			button.getButton().setEnabled(false);
+			setIsCpu(false); 
+			
 		}
 	} 
 
 	
 		
-		public void CpuMove() {
+	public Button CpuMove(){
+		int score = Integer.MIN_VALUE; 
+		int index1 = 0, index2 = 0;
+		for (int i = 0; i < 3; i++){
+			for (int j = 0; j < 3; j++){
+				if (board[i][j].getString().equals("")){
+					board[i][j].getButton().setText(getCpuPick());
+					int value = minimax(0, false);
+					board[i][j].getButton().setText("");
+					if (value > score){
+						score = value; 
+						index1 = i;
+						index2 = j; 
+					}
+				}
+			}
+		}
+		return board[index1][index2]; 
+	}
+	
+	public int minimax(int depth, boolean max){
+		
+		if (checkWin()) {
+			if(getVsCpu()) {
+				if (getIsPlayer2() || getIsCpu())
+					return 10; 
+				else
+					return -10; 
+			}
+		}
+		else{
+			if (tie)
+				return 0; 
+		}
+		
+		
+		if (max == true){
+			int score = Integer.MIN_VALUE;
+			for (int i = 0; i < 3; i++){
+				for (int j = 0; j < 3; j++){
+					if (board[i][j].getString().equals("")){
+						board[i][j].getButton().setText(getCpuPick());
+						int value = minimax(depth + 1, false);
+						board[i][j].getButton().setText("");
+						score = Math.max(value, score);
+					}
+				}
+			}
+			return score;
+		}
+		
+		else{
+			int score = Integer.MAX_VALUE;
+			for (int i = 0; i < 3; i++){
+				for (int j = 0; j < 3; j++){
+					if (board[i][j].getString().equals("")){
+						board[i][j].getButton().setText(getCpuPick());
+						int value = minimax(depth + 1, true);
+						board[i][j].getButton().setText("");
+						score = Math.min(value, score);
+					}
+				}
+			}
+			return score; 
+			
+		}
+		
+	}
+	
+		/* public void CpuMove() {
 			boolean moved = false;
 			for (int i = 0; i < 3; i++){
 				for (int j = 0; j < 3; j++){
@@ -176,7 +256,7 @@ public class Board extends Main {
 					break; 
 			}
 			setIsCpu(false); 
-		}
+		} */
 
 		public boolean checkWin() {
 			 tie = true;
