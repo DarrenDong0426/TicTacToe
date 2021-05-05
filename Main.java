@@ -1,5 +1,3 @@
-package TicTacToe;
-
 import java.awt.Color;
 import java.util.concurrent.TimeUnit;
 
@@ -22,6 +20,7 @@ public class Main extends JFrame {
 	private static boolean isPlayer2;
 	private static boolean isCPU;
 	private static boolean vsCPU;
+	private static String[] arr = {"OK"}; 
 	
 	
 	public static void main(String[] args) {
@@ -37,17 +36,23 @@ public class Main extends JFrame {
 		UIManager.put("Button.disabledText", new Color(51, 204, 255));
 		
 		String[] opponentOption = {"Computer", "Player"}; 
-		opponent = JOptionPane.showOptionDialog(null,"Who do you want to play against?", "Choose your opponent", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, opponentOption, null);
-		
-		Player1 = JOptionPane.showInputDialog("Enter the name of Player 1: ");
-		
+		opponent = JOptionPane.showOptionDialog(null,"Who do you want to play against?", "Choose your opponent", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, opponentOption, null);
+		do{
+			Player1 = JOptionPane.showInputDialog(null, "Enter the name of Player 1: ", "Name");
+			if ((Player1.equals("") || Player1.equals(null)))
+				JOptionPane.showMessageDialog(null, "Please enter Player1's name"); 
+		}while (Player1.equals("") || Player1.equals(null));
 		
 		// If the opponent is another player, ask user the name of that player
 		if (opponent == 1){
 			vsCPU = false;
-			Player2 = JOptionPane.showInputDialog("Enter the name of Player 2: ");
+			do{
+				Player2 = JOptionPane.showInputDialog("Enter the name of Player 2: ");
+				if ((Player2.equals("") || Player2.equals(null)))
+					JOptionPane.showMessageDialog(null, "Please enter Player2's name"); 
+			}while (Player2.equals("") || Player2.equals(null));
 			String[]choices = {"X", "O"};
-			choice = JOptionPane.showOptionDialog(null, Player1 + ", do you want to be X or O?", "Choose", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
+			choice = JOptionPane.showOptionDialog(null, Player1 + ", do you want to be X or O?", "Choose", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
 			if (choice == 0) {
 				JOptionPane.showMessageDialog(null, Player1 + " is X and " + Player2 + " is O");
 				playerPick = "X";
@@ -59,7 +64,7 @@ public class Main extends JFrame {
 				player2Pick = "X";
 			}
 			String[] orderOption = {Player1, Player2}; 
-			order = JOptionPane.showOptionDialog(null,"Who do you want to have the first move?: ", "Choose who gets the first move", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, orderOption, null); 
+			order = JOptionPane.showOptionDialog(null,"Who do you want to have the first move?: ", "Choose who gets the first move", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, orderOption, null); 
 			 if(order == 0) {
 				 JOptionPane.showMessageDialog(null, Player1 + " goes first!");
 				 isPlayer1 = true;
