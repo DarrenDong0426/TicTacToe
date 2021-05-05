@@ -1,3 +1,5 @@
+package TicTacToe;
+
 import java.awt.Color;
 import java.util.concurrent.TimeUnit;
 
@@ -91,6 +93,7 @@ public class Main extends JFrame {
 				JOptionPane.showMessageDialog(null, Player1 + " is O and " + "the Computer is X");
 				playerPick = "O";
 				cpuPick = "X";
+				player2Pick = "X";
 			}
 			String[] orderOption = {"Computer", "Player"}; 
 			order = JOptionPane.showOptionDialog(null,"Who do you want to have the first move?: ", "Choose who gets the first move", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, orderOption, null);

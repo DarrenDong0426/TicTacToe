@@ -1,3 +1,5 @@
+package TicTacToe;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -201,6 +203,7 @@ public class Board extends Main {
 			for (int i = 0; i < 3; i++){
 				for (int j = 0; j < 3; j++){
 					if (board[i][j].getString().equals("")){
+						//board[i][j].getButton().setForeground(Color.white);
 						board[i][j].getButton().setText(getCpuPick());
 						int value = minimax(depth + 1, false);
 						board[i][j].getButton().setText("");
