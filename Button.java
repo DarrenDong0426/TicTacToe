@@ -11,16 +11,12 @@ import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 
-public class Button extends Main {
+public class Button{
 
-	private int index1;
-	private int index2;
 	private JButton button; 
 		
 	public Button(int i, int j){
 		
-		index1 = i;
-		index2 = j;
 		button = new JButton();
 		button.setBackground(Color.WHITE);
 		

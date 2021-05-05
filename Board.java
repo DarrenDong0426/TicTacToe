@@ -114,7 +114,7 @@ public class Board extends Main {
 									}
 								}
 						if (checkWin().equals("Player")) {
-							JOptionPane.showMessageDialog(Board.getFrame(), getPlayer1() + " is the winner!");
+							JOptionPane.showMessageDialog(frame, getPlayer1() + " is the winner!");
 							String Option[] = {"Yes", "No"};
 							int Answer = JOptionPane.showOptionDialog(null,"Replay?", "Do you want to play again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, Option, null);
 							if (Answer == 0){
@@ -125,7 +125,7 @@ public class Board extends Main {
 								System.exit(0);
 						}
 						if (checkWin().equals("opponent")){
-							JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");;
+							JOptionPane.showMessageDialog(frame, getPlayer2() + " is the winner!");;
 							String Option[] = {"Yes", "No"};
 							int Answer = JOptionPane.showOptionDialog(null,"Replay?", "Do you want to play again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, Option, null);
 							if (Answer == 0){
@@ -136,7 +136,7 @@ public class Board extends Main {
 								System.exit(0);
 						}
 						if (checkWin().equals("tie")){
-							JOptionPane.showMessageDialog(Board.getFrame(), "It's a tie! No one is the winner!");
+							JOptionPane.showMessageDialog(frame, "It's a tie! No one is the winner!");
 							String Option[] = {"Yes", "No"};
 							int Answer = JOptionPane.showOptionDialog(null,"Replay?", "Do you want to play again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, Option, null);
 							if (Answer == 0){
@@ -291,9 +291,5 @@ public class Board extends Main {
 				 return "tie"; 
 			 
 			return "none"; 
-		}
-		
-		public static JFrame getFrame(){
-			return frame; 
 		}
 }
