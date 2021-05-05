@@ -1,5 +1,3 @@
-package TicTacToe;
-
 import java.awt.Color;
 import java.util.concurrent.TimeUnit;
 
@@ -87,6 +85,7 @@ public class Main extends JFrame {
 				JOptionPane.showMessageDialog(null, Player1 + " is X and " + "the Computer is O");
 				playerPick = "X";
 				cpuPick = "O";
+				player2Pick = "O"; 
 			}
 			if (choice == 1) {
 				JOptionPane.showMessageDialog(null, Player1 + " is O and " + "the Computer is X");

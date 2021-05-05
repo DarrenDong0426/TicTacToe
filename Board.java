@@ -23,7 +23,7 @@ public class Board extends Main {
 	private Button[][] board;
 	private static JFrame frame; 
 	public static JLabel label;
-	private static boolean tie; 
+	private static boolean tie = false; 
 	private Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); 
 	private JPanel infoPanel;
 	private JPanel boardPanel; 
@@ -75,18 +75,13 @@ public class Board extends Main {
 										button.getButton().setFont(new Font("Purisa", Font.PLAIN,button.getButton().getHeight()));
 										button.getButton().removeActionListener(this);
 									}
-									if (checkWin() == false){
+									if (checkWin().equals("none")){
 										label.setText(Player1 + " it is your turn");
 										label.setFont(new Font("Purisa", Font.PLAIN,40));
 										label.setForeground(new Color(51, 51, 51));
 										button.getButton().removeActionListener(this);
-										Button button = CpuMove();
-										button.getButton().setText(getCpuPick());
-										button.getButton().setForeground(new Color(51, 204, 255));
-										button.getButton().setFont(new Font("Purisa", Font.PLAIN, button.getButton().getHeight())); 
-										button.getButton().setEnabled(false);
-										setIsCpu(false); 
-										if (checkWin() == false)
+										CpuMove();
+										if (checkWin().equals("none"))
 											setIsCpu(false); 
 										else
 											setIsCpu(true);
@@ -118,18 +113,8 @@ public class Board extends Main {
 										button.getButton().removeActionListener(this);
 									}
 								}
-						if (checkWin()) {
-							if(getVsCpu()) {
-								if (getIsPlayer2() || getIsCpu())
-									JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");
-								else
-									JOptionPane.showMessageDialog(Board.getFrame(), getPlayer1() + " is the winner!");
-							}
-							else 
-								if(getIsPlayer2())
-									JOptionPane.showMessageDialog(Board.getFrame(), getPlayer1() + " is the winner!");
-								else
-									JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");;
+						if (checkWin().equals("Player")) {
+							JOptionPane.showMessageDialog(Board.getFrame(), getPlayer1() + " is the winner!");
 							String Option[] = {"Yes", "No"};
 							int Answer = JOptionPane.showOptionDialog(null,"Replay?", "Do you want to play again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, Option, null);
 							if (Answer == 0){
@@ -139,37 +124,42 @@ public class Board extends Main {
 							if (Answer == 1)
 								System.exit(0);
 						}
-						else{
-							if (tie){
-								JOptionPane.showMessageDialog(Board.getFrame(), "It's a tie! No one is the winner!");
-								String Option[] = {"Yes", "No"};
-								int Answer = JOptionPane.showOptionDialog(null,"Replay?", "Do you want to play again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, Option, null);
-								if (Answer == 0){
-									frame.setVisible(false);
-									main(null); 
-								}
-								if (Answer == 1)
-									System.exit(0);
-							} 
+						if (checkWin().equals("opponent")){
+							JOptionPane.showMessageDialog(Board.getFrame(), getPlayer2() + " is the winner!");;
+							String Option[] = {"Yes", "No"};
+							int Answer = JOptionPane.showOptionDialog(null,"Replay?", "Do you want to play again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, Option, null);
+							if (Answer == 0){
+								frame.setVisible(false);
+								main(null); 
+							}
+							if (Answer == 1)
+								System.exit(0);
 						}
+						if (checkWin().equals("tie")){
+							JOptionPane.showMessageDialog(Board.getFrame(), "It's a tie! No one is the winner!");
+							String Option[] = {"Yes", "No"};
+							int Answer = JOptionPane.showOptionDialog(null,"Replay?", "Do you want to play again?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, Option, null);
+							if (Answer == 0){
+								frame.setVisible(false);
+								main(null); 
+							}
+							if (Answer == 1)
+								System.exit(0);
+						} 
 					}
 				});
 			}
 		}
 		if (getIsCpu()){
-			Button button = CpuMove();
-			button.getButton().setText(getCpuPick());
-			button.getButton().setForeground(new Color(51, 204, 255));
-			button.getButton().setFont(new Font("Purisa", Font.PLAIN, button.getButton().getHeight())); 
-			button.getButton().setEnabled(false);
-			setIsCpu(false); 
+			CpuMove();
+
 			
 		}
 	} 
 
 	
 		
-	public Button CpuMove(){
+	public void CpuMove(){
 		int score = Integer.MIN_VALUE; 
 		int index1 = 0, index2 = 0;
 		for (int i = 0; i < 3; i++){
@@ -186,22 +176,23 @@ public class Board extends Main {
 				}
 			}
 		}
-		return board[index1][index2]; 
+		board[index1][index2].getButton().setText(getCpuPick());
+		board[index1][index2].getButton().setForeground(new Color(51, 204, 255));
+		board[index1][index2].getButton().setFont(new Font("Purisa", Font.PLAIN, board[index1][index2].getButton().getHeight())); 
+		board[index1][index2].getButton().setEnabled(false);
+		setIsCpu(false); 
 	}
 	
 	public int minimax(int depth, boolean max){
 		
-		if (checkWin()) {
-			if(getVsCpu()) {
-				if (getIsPlayer2() || getIsCpu())
-					return 10; 
-				else
-					return -10; 
-			}
+		if (checkWin().equals("Player")) {
+			return -10; 
 		}
-		else{
-			if (tie)
-				return 0; 
+		if (checkWin().equals("opponent")){
+			return 10; 
+		}
+		if (checkWin().equals("tie")){
+			return 0; 
 		}
 		
 		
@@ -225,7 +216,7 @@ public class Board extends Main {
 			for (int i = 0; i < 3; i++){
 				for (int j = 0; j < 3; j++){
 					if (board[i][j].getString().equals("")){
-						board[i][j].getButton().setText(getCpuPick());
+						board[i][j].getButton().setText(getPlayerPick());
 						int value = minimax(depth + 1, true);
 						board[i][j].getButton().setText("");
 						score = Math.min(value, score);
@@ -258,7 +249,35 @@ public class Board extends Main {
 			setIsCpu(false); 
 		} */
 
-		public boolean checkWin() {
+		public String checkWin() {
+			 
+			for (int i = 0; i < 3; i++){
+				if (board[i][0].getString().equals(getPlayer2Pick()) && board[i][0].getString().equals(board[i][1].getString()) && board[i][0].getString().equals(board[i][2].getString()))
+					return "opponent";
+			}
+			for (int j = 0; j < 3; j++){
+				if (board[0][j].getString().equals(getPlayer2Pick()) && board[0][j].getString().equals(board[1][j].getString()) && board[0][j].getString().equals(board[2][j].getString()))
+					return "opponent";	
+			}
+			if (board[0][0].getString().equals(getPlayer2Pick()) && board[0][0].getString().equals(board[1][1].getString()) && board[0][0].getString().equals(board[2][2].getString()))
+				return "opponent";
+			if (board[0][2].getString().equals(getPlayer2Pick()) && board[0][2].getString().equals(board[1][1].getString()) && board[0][2].getString().equals(board[2][0].getString()))
+				return "opponent";
+			
+			
+			for (int i = 0; i < 3; i++){
+				if (board[i][0].getString().equals(getPlayerPick()) && board[i][0].getString().equals(board[i][1].getString()) && board[i][0].getString().equals(board[i][2].getString()))
+					return "Player";
+			}
+			for (int j = 0; j < 3; j++){
+				if (board[0][j].getString().equals(getPlayerPick()) && board[0][j].getString().equals(board[1][j].getString()) && board[0][j].getString().equals(board[2][j].getString()))
+					return "Player";	
+			}
+			if (board[0][0].getString().equals(getPlayerPick()) && board[0][0].getString().equals(board[1][1].getString()) && board[0][0].getString().equals(board[2][2].getString()))
+				return "Player";
+			if (board[0][2].getString().equals(getPlayerPick()) && board[0][2].getString().equals(board[1][1].getString()) && board[0][2].getString().equals(board[2][0].getString()))
+				return "Player";
+			
 			 tie = true;
 			 for (int i = 0; i < 3; i++){
 				 for (int j = 0; j < 3; j++){
@@ -267,23 +286,11 @@ public class Board extends Main {
 						 break;  
 					 }
 				 }
-				 if (!tie)
-					 break;
 			}
-			for (int i = 0; i < 3; i++){
-				if (!board[i][0].getString().equals("") && board[i][0].getString().equals(board[i][1].getString()) && board[i][0].getString().equals(board[i][2].getString()))
-					return true;
-			}
-			for (int j = 0; j < 3; j++){
-				if (!board[0][j].getString().equals("") && board[0][j].getString().equals(board[1][j].getString()) && board[0][j].getString().equals(board[2][j].getString()))
-					return true;	
-			}
-			if (!board[0][0].getString().equals("") && board[0][0].getString().equals(board[1][1].getString()) && board[0][0].getString().equals(board[2][2].getString()))
-				return true;
-			if (!board[0][2].getString().equals("") && board[0][2].getString().equals(board[1][1].getString()) && board[0][2].getString().equals(board[2][0].getString()))
-				return true;
-			
-			return false;
+			 if (tie)
+				 return "tie"; 
+			 
+			return "none"; 
 		}
 		
 		public static JFrame getFrame(){
