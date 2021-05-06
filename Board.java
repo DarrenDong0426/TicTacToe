@@ -1,4 +1,3 @@
-package TicTacToe;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -78,13 +77,11 @@ public class Board extends Main {
 										button.getButton().removeActionListener(this);
 									}
 									if (checkWin().equals("none")){
-										label.setText(Player1 + " it is your turn");
-										label.setFont(new Font("Purisa", Font.PLAIN,40));
-										label.setForeground(new Color(51, 51, 51));
 										button.getButton().removeActionListener(this);
 										CpuMove();
-										if (checkWin().equals("none"))
+										if (checkWin().equals("none")){
 											setIsCpu(false); 
+										}
 										else
 											setIsCpu(true);
 									}
@@ -153,10 +150,26 @@ public class Board extends Main {
 			}
 		}
 		if (getIsCpu()){
+			for (int i = 0; i < 3; i++){
+				for (int j = 0; j < 3; j++){
+					board[i][j].getButton().setForeground(Color.WHITE);
+				}
+			}
+			label.setText("CPU is deciding... Do not make a move."); 
+			label.setFont(new Font("Purisa", Font.PLAIN,20));
+			label.setForeground(new Color(51, 51, 51));
 			CpuMove();
-
+			label.setText(Player1 + " it is your turn"); 
+			label.setFont(new Font("Purisa", Font.PLAIN,40));
 			
 		}
+		if (getIsPlayer1()){
+			label.setText(Player1 + " it is your turn");  
+			label.setFont(new Font("Purisa", Font.PLAIN,40));
+			label.setForeground(new Color(51, 51, 51));
+			
+		}
+			
 	} 
 
 	
@@ -203,7 +216,6 @@ public class Board extends Main {
 			for (int i = 0; i < 3; i++){
 				for (int j = 0; j < 3; j++){
 					if (board[i][j].getString().equals("")){
-						//board[i][j].getButton().setForeground(Color.white);
 						board[i][j].getButton().setText(getCpuPick());
 						int value = minimax(depth + 1, false);
 						board[i][j].getButton().setText("");
