@@ -1,4 +1,8 @@
+package TicTacToe;
+
 import java.awt.Color;
+
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
@@ -18,6 +22,11 @@ public class Button{
 	           
 	}
 	
+	
+	
+	
+	
+	// Accessor Method
 	public JButton getButton(){return button;}
 	public String getString(){return this.getButton().getText();}
 }

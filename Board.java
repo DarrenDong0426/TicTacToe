@@ -1,18 +1,24 @@
+package TicTacToe;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class Board extends Main {
+
+public class Board extends Main{
 
 	private Button[][] board;
 	private static JFrame frame; 
@@ -25,12 +31,15 @@ public class Board extends Main {
 
 	public Board(){
 		
+		// Create panel for information on the game
 		infoPanel = new JPanel(); 
 
+		// Create panel for the board of the game in a 3x3 grid
 		boardPanel = new JPanel();
 		boardPanel.setLayout(new GridLayout(3, 3, 0, 0));
 
 		label = new JLabel();
+		// Create a frame for everything
 		frame = new JFrame(); 
 		infoPanel.add(label);
 		frame.add(infoPanel, BorderLayout.NORTH); 
@@ -39,10 +48,15 @@ public class Board extends Main {
 		frame.setTitle("Tic-Tac-Toe");
 		
 	    frame.setSize(650, 650);
+		/*frame.setExtendedState(JFrame.MAXIMIZED_BOTH);*/ 
 	
 	    frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 	    frame.setResizable(true); 
 	   
+		
+		
+
+		// Create Button objects for each board location 
 		
 		board = new Button[3][3];
 		for (int i = 0; i < 3; i++){
@@ -229,6 +243,26 @@ public class Board extends Main {
 		
 	}
 	
+		/* public void CpuMove() {
+			boolean moved = false;
+			for (int i = 0; i < 3; i++){
+				for (int j = 0; j < 3; j++){
+					if (board[i][j].getString().equals("")){
+						board[i][j].getButton().setForeground(new Color(51, 204, 255));
+						board[i][j].getButton().setFont(new Font("Purisa", Font.PLAIN, board[i][j].getButton().getHeight())); 
+						board[i][j].getButton().setText(getCpuPick());
+						board[i][j].getButton().setEnabled(false);
+						
+						moved = true;
+						break;
+					}
+				}
+				if (moved)
+					break; 
+			}
+			setIsCpu(false); 
+		} */
+
 		public String checkWin() {
 			 
 			for (int i = 0; i < 3; i++){
