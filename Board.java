@@ -166,7 +166,7 @@ public class Board extends Main {
 			for (int j = 0; j < 3; j++){
 				if (board[i][j].getString().equals("")){
 					board[i][j].getButton().setText(getCpuPick());
-					int value = minimax(0, false);
+					int value = minimax(false);
 					board[i][j].getButton().setText("");
 					if (value > score){
 						score = value; 
@@ -183,7 +183,7 @@ public class Board extends Main {
 		setIsCpu(false); 
 	}
 	
-	public int minimax(int depth, boolean max){
+	public int minimax(boolean max){
 		
 		if (checkWin().equals("Player")) {
 			return -10; 
@@ -202,7 +202,7 @@ public class Board extends Main {
 				for (int j = 0; j < 3; j++){
 					if (board[i][j].getString().equals("")){
 						board[i][j].getButton().setText(getCpuPick());
-						int value = minimax(depth + 1, false);
+						int value = minimax(false);
 						board[i][j].getButton().setText("");
 						score = Math.max(value, score);
 					}
@@ -217,7 +217,7 @@ public class Board extends Main {
 				for (int j = 0; j < 3; j++){
 					if (board[i][j].getString().equals("")){
 						board[i][j].getButton().setText(getPlayerPick());
-						int value = minimax(depth + 1, true);
+						int value = minimax(true);
 						board[i][j].getButton().setText("");
 						score = Math.min(value, score);
 					}
