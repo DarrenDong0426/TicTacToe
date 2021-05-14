@@ -1,13 +1,10 @@
-package TicTacToe;
-
 import java.awt.Color;
 
-
 import javax.swing.JOptionPane;
-
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-public class Main {
+public class Main extends JFrame {
 	
 	public static String Player1;
 	private static int opponent; 
@@ -24,17 +21,9 @@ public class Main {
 	private static boolean vsCPU;
 	
 	
-	
 	public static void main(String[] args) {
 		UIManager.put("Button.select", Color.white);
-		//Ask the user for name
-	
-		/* Ask user if the opponent is another player or a computer 
-		 * 
-		 * opponent = 0 if User pick Computer
-		 * opponent = 1 if User pick Player
-		 * 
-		 */
+
 		UIManager.put("Button.disabledText", new Color(51, 204, 255));
 		
 		String[] opponentOption = {"Computer", "Player"}; 
@@ -42,16 +31,15 @@ public class Main {
 		do{
 			Player1 = JOptionPane.showInputDialog(null, "Enter the name of Player 1: ", "Name");
 			if ((Player1.equals("") || Player1.equals(null)))
-				JOptionPane.showMessageDialog(null, "Please enter Player 1's name"); 
+				JOptionPane.showMessageDialog(null, "Please enter Player1's name"); 
 		}while (Player1.equals("") || Player1.equals(null));
 		
-		// If the opponent is another player, ask user the name of that player
 		if (opponent == 1){
 			vsCPU = false;
 			do{
 				Player2 = JOptionPane.showInputDialog("Enter the name of Player 2: ");
 				if ((Player2.equals("") || Player2.equals(null)))
-					JOptionPane.showMessageDialog(null, "Please enter Player 2's name"); 
+					JOptionPane.showMessageDialog(null, "Please enter Player2's name"); 
 			}while (Player2.equals("") || Player2.equals(null));
 			String[]choices = {"X", "O"};
 			choice = JOptionPane.showOptionDialog(null, Player1 + ", do you want to be X or O?", "Choose", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, null); 
@@ -79,12 +67,6 @@ public class Main {
 			 }
 		}
 			
-		/* If the opponent is a computer, ask user who gets to play first
-		 * 
-		 * order = 0 if Computer plays first 
-		 * order = 1 if Player plays first
-		 * 
-		 */
 		if (opponent == 0){
 			vsCPU = true;
 			Player2 = "Computer";
@@ -118,16 +100,13 @@ public class Main {
 		}
 		
 		
-		
-		
-		// Create a TicTacToe Board
+
 		board = new Board(); 	
 		
 		
 		
 	}
 
-	// Accessor/Setter Methods
 	public int getOpponent(){return opponent;}
 	public String getPlayer2(){return Player2;}
 	public String getPlayer1(){return Player1;}
