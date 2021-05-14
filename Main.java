@@ -1,8 +1,12 @@
+package TicTacToe;
+
 import java.awt.Color;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIDefaults;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 
 public class Main extends JFrame {
 	
@@ -22,6 +26,10 @@ public class Main extends JFrame {
 	
 	
 	public static void main(String[] args) {
+		UIDefaults defaults = UIManager.getLookAndFeelDefaults();
+		defaults.put("Button.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
+		
+		
 		UIManager.put("Button.select", Color.white);
 
 		UIManager.put("Button.disabledText", new Color(51, 204, 255));

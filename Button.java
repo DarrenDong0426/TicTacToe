@@ -1,3 +1,5 @@
+package TicTacToe;
+
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,7 +15,7 @@ public class Button{
 		button.setBackground(Color.WHITE);
 		
 		button.setBorder(BorderFactory.createLineBorder(Color.black));
-		
+	
 	     
 	           
 	}
